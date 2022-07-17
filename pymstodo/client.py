@@ -62,6 +62,7 @@ class Task:
     status: str
     createdDateTime: str
     lastModifiedDateTime: str
+    reminderDateTime: DueDate
     dueDateTime: DueDate
     body: Body
 
@@ -99,6 +100,15 @@ class Task:
         if self.dueDateTime:
             return datetime.strptime(
                 self.dueDateTime["dateTime"].split(".")[0], "%Y-%m-%dT%H:%M:%S"
+            )
+        else:
+            return None
+
+    @property
+    def reminder_date(self) -> Optional[datetime]:
+        if self.reminderDateTime:
+            return datetime.strptime(
+                self.reminderDateTime["dateTime"].split(".")[0], "%Y-%m-%dT%H:%M:%S"
             )
         else:
             return None
